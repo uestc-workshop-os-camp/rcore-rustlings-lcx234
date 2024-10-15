@@ -6,18 +6,17 @@
 // Execute `rustlings hint generics2` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+// ~I AM NOT DONE
 
-struct Wrapper {
-    value: u32,
-}
-
-impl Wrapper {
-    pub fn new(value: u32) -> Self {
-        Wrapper { value }
-    }
-}
-
+struct Wrapper<T: Clone> {  
+    value: T,  
+}  
+  
+impl<T: Clone> Wrapper<T> {  
+    pub fn new(value: T) -> Self {  
+        Wrapper { value: value.clone() }  
+    }  
+}  
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -29,6 +28,7 @@ mod tests {
 
     #[test]
     fn store_str_in_wrapper() {
-        assert_eq!(Wrapper::new("Foo").value, "Foo");
+        let original = "Foo".to_string();
+        assert_eq!(Wrapper::new(original).value, "Foo");
     }
 }
